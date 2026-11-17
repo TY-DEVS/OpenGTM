@@ -47,9 +47,8 @@ services:
       - POSTGRES_DB=${POSTGRES_DB:-yupcha}
     volumes:
       - pgdata:/var/lib/postgresql/data
-    ports:
-      # Host-local only for admin tools; application containers use lead_net.
-      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    expose:
+      - "5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-yupcha} -d ${POSTGRES_DB:-yupcha}"]
       interval: 5s
@@ -109,9 +108,8 @@ services:
       # nginx is the only client on lead_net: trust its X-Real-IP. lead_net has a fixed subnet
       # (LEAD_NET_SUBNET), which is the default trusted range; bridge/LAN peers outside it are untrusted.
       TRUST_PROXY_CIDRS: ${TRUST_PROXY_CIDRS:-${LEAD_NET_SUBNET:-172.29.250.0/24}}
-    ports:
-      # Host-local diagnostics only; public traffic goes through nginx.
-      - "127.0.0.1:${API_GO_PORT:-8001}:8000"
+    expose:
+      - "8000"
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -272,8 +270,8 @@ services:
   nginx:
     image: nginx:alpine
     container_name: lead-data-web
-    ports:
-      - "${PORT:-3000}:80"
+    expose:
+      - "80"
     volumes:
       - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
@@ -287,15 +285,14 @@ services:
       retries: 3
     networks:
       - lead_net
+      - coolify
 
   # ── Redis (live pub/sub; durable jobs live in Postgres) ─────────
   redis:
     image: redis:7-alpine
     container_name: lead-data-redis
-    ports:
-      # Redis has no authentication in this self-host profile; never expose it
-      # to the LAN. Containers reach it through the private lead_net network.
-      - "127.0.0.1:${REDIS_PORT:-6379}:6379"
+    expose:
+      - "6379"
     volumes:
       - redisdata:/data
     healthcheck:
@@ -392,6 +389,8 @@ volumes:
   redisdata:
 
 networks:
+  coolify:
+    external: true
   # Go services <-> browser service only; internal = no route to the outside.
   browser_net:
     internal: true
