@@ -5,8 +5,8 @@
   "version": "0.1.0",
   "description": "OpenGTM documentation, guides and REST API reference \u2014 https://opengtm.palash.dev",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "node init && astro dev",
+    "build": "node init && astro build",
     "preview": "astro preview",
     "lint": "astro check",
     "openapi:sync": "cd ../.. && uv run python scripts/export_openapi.py",

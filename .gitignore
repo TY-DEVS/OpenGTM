@@ -50,13 +50,9 @@ reference/research/
 reference/research-summaries/
 
 # ── Environment / Secrets ───────────────────
-.env
-.env.local
-.env.production
 .opengtm-initial-credentials
 
 # ── IDE ─────────────────────────────────────
-.vscode/
 .idea/
 *.swp
 *.swo
@@ -96,3 +92,4 @@ apps/backend-go/bin/
 /apps/backend-go/api
 /apps/backend-go/worker
 /apps/backend-go/mcp
+config.bat

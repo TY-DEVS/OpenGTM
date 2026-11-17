@@ -1,21 +1,21 @@
 {
-    "name": "@opengtm/chrome-extension",
-    "version": "0.1.0",
-    "private": true,
-    "description": "OpenGTM Capture — Chrome MV3 extension that extracts structured data from the current page and pushes it into an OpenGTM workbook.",
-    "license": "AGPL-3.0-only",
-    "scripts": {
-        "build": "bun run scripts/build.ts",
-        "dev": "echo '@opengtm/chrome-extension — no dev server; run build and load dist/ unpacked'",
-        "typecheck": "tsc --noEmit",
-        "lint": "tsc --noEmit",
-        "test": "bun test",
-        "zip": "bun run build && cd dist && zip -r ../opengtm-chrome-extension.zip ."
-    },
-    "devDependencies": {
-        "@types/bun": "^1.4.3",
-        "@types/chrome": "^0.3.5",
-        "happy-dom": "^21.0.3",
-        "typescript": "^7.0.2"
-    }
+  "name": "@opengtm/chrome-extension",
+  "version": "0.1.0",
+  "private": true,
+  "description": "OpenGTM Capture \u2014 Chrome MV3 extension that extracts structured data from the current page and pushes it into an OpenGTM workbook.",
+  "license": "AGPL-3.0-only",
+  "scripts": {
+    "build": "node init && bun run scripts/build.ts",
+    "dev": "node init && echo '@opengtm/chrome-extension \u2014 no dev server; run build and load dist/ unpacked'",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "test": "bun test",
+    "zip": "bun run build && cd dist && zip -r ../opengtm-chrome-extension.zip ."
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.3",
+    "@types/chrome": "^0.3.5",
+    "happy-dom": "^21.0.3",
+    "typescript": "^7.0.2"
+  }
 }

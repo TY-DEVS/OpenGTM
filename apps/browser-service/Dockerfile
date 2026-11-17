@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1.7
 # OpenGTM browser service: Playwright Chromium (headless shell) + scraper libs.
 # Run with --security-opt seccomp=seccomp-chromium.json (Chromium sandbox).
 # Internal only: compose attaches it to browser_net (internal) + browser_egress,
