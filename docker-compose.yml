@@ -268,12 +268,13 @@ services:
 
   # ── Nginx (reverse proxy in front of api-go) ───────────────
   nginx:
-    image: nginx:alpine
+    build:
+      context: ./infra/nginx
+      dockerfile: Dockerfile
+    image: opengtm-nginx:local
     container_name: lead-data-web
     expose:
       - "80"
-    volumes:
-      - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       api-go:
         condition: service_healthy
