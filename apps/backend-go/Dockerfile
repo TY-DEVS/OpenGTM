@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 # OpenGTM Go backend: one multi-stage build, one target per binary.
 #
 #   docker build --target api       -t opengtm-api-go:local       --build-context web=apps/web apps/backend-go
